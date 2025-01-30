@@ -1,4 +1,4 @@
-# campusbuddy
+# campusbuddyadmin
 
 A new Flutter project.
 

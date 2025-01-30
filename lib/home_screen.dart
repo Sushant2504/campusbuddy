@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'cafes_screen.dart';
+import 'canteen_screen.dart';
+import 'parking_screen.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -6,15 +10,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 2; // Default selected index (Shopping Cart)
+  int _selectedIndex = 2; // Default selected index (Canteen)
 
   // List of pages (replace with actual screens)
   final List<Widget> _pages = [
-    Center(child: Text('Home Screen', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-    Center(child: Text('Cafes', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-    Center(child: Text('Canteen', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-    Center(child: Text('Parking', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-    Center(child: Text('Profile', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+    Center(child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+    CafesScreen(),
+    CanteenScreen(),
+    ParkingScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -55,11 +59,11 @@ class _HomeScreenState extends State<HomeScreen> {
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-              BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
-              BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: ''),
-              BottomNavigationBarItem(icon: Icon(Icons.settings), label: ''),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.local_cafe), label: 'Cafes'),
+              BottomNavigationBarItem(icon: Icon(Icons.fastfood), label: 'Canteen'),
+              BottomNavigationBarItem(icon: Icon(Icons.local_parking), label: 'Parking'),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
             ],
           ),
         ),

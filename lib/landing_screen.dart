@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'login.dart';
 import 'login_screen.dart'; // Navigate to login screen instead of home screen
 
 class LandingScreen extends StatefulWidget {

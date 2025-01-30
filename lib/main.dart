@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'splash_screen.dart'; // Import the splash screen
+import 'splash_screen.dart'; // Now starts with SplashScreen
 
 void main() {
   runApp(MyApp());
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(), // Set SplashScreen as the initial screen
+      home: SplashScreen(), // Starts with SplashScreen
     );
   }
 }

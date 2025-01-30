@@ -23,7 +23,19 @@ class _SignupScreenState extends State<SignupScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("Create an Account", style: TextStyle(fontSize: width * 0.08, fontWeight: FontWeight.bold)),
-            SizedBox(height: height * 0.03),
+            SizedBox(height: height * 0.02),
+            // SizedBox(height: height * 0.02),
+
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                hintText: "Name",
+                filled: true,
+                fillColor: Colors.grey.shade200,
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              ),
+            ),
+                        SizedBox(height: height * 0.015),
 
             TextField(
               controller: _emailController,
@@ -47,7 +59,39 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             SizedBox(height: height * 0.02),
+    TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                hintText: "PRN",
+                filled: true,
+                fillColor: Colors.grey.shade200,
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              ),
+            ),
+                        SizedBox(height: height * 0.02),
 
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                hintText: "Department",
+                filled: true,
+                fillColor: Colors.grey.shade200,
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              ),
+            ),
+                        SizedBox(height: height * 0.02),
+
+                TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                hintText: "Year of study",
+                filled: true,
+                fillColor: Colors.grey.shade200,
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+              ),
+            ),
+                        SizedBox(height: height * 0.02),
+            
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFF3A77FA),
@@ -58,6 +102,50 @@ class _SignupScreenState extends State<SignupScreen> {
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
               },
               child: Text("SIGN UP", style: TextStyle(fontSize: width * 0.045, color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
+              // Divid
+              //er with "OR LOGIN WITH EMAIL"
+              
+                     SizedBox(height: height * 0.02),
+
+            Row(
+              children: [
+                Expanded(child: Divider(color: Colors.grey.shade400, thickness: 1)),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    "OR LOGIN WITH EMAIL",
+                    style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Expanded(child: Divider(color: Colors.grey.shade400, thickness: 1)),
+              ],
+            ),
+                        SizedBox(height: height * 0.02),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                side: BorderSide(color: Colors.grey.shade300),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                padding: EdgeInsets.symmetric(vertical: height * 0.015, horizontal: width * 0.1),
+              ),
+              onPressed: () {
+                // Implement Google Sign-In Logic Here
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/google_icon.png', height: height * 0.025), // Add Google icon in assets
+                  SizedBox(width: 10),
+                  Text(
+                    "Continue with Google",
+                    style: TextStyle(fontSize: width * 0.045, color: Colors.black),
+                  ),
+                ],
+              ),
             ),
 
             SizedBox(height: height * 0.02),

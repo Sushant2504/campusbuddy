@@ -11,10 +11,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  url_launcher: ^6.1.14 # Add this dependency
 
   cupertino_icons: ^1.0.8
-
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/app_logo.png" # Path to your logo
+  adaptive_icon_background: "#ffffff" # Background color for Android adaptive icon
+  adaptive_icon_foreground: "assets/app_logo.png" # Optional for adaptive icons
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.3
+
   flutter_test:
     sdk: flutter
 

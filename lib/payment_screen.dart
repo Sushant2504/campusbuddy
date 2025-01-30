@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import url_launcher
 
 class PaymentScreen extends StatefulWidget {
   @override
@@ -12,9 +13,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
     {
       "category": "UPI",
       "options": [
-        {"name": "Paytm UPI", "icon": "assets/paytm.png"},
-        {"name": "PhonePe", "icon": "assets/phonepe.png"},
-        {"name": "GPay", "icon": "assets/gpay.png"},
+        {"name": "Paytm UPI", "icon": "assets/paytm.png", "upi": "paytm://upi/pay"},
+        {"name": "PhonePe", "icon": "assets/phonepe.png", "upi": "phonepe://upi/pay"},
+        {"name": "GPay", "icon": "assets/google.png", "upi": "tez://upi/pay"},
       ]
     },
     {
@@ -30,6 +31,68 @@ class _PaymentScreenState extends State<PaymentScreen> {
       ]
     }
   ];
+
+  // Method to launch payment app
+  Future<void> _processPayment() async {
+    final selectedOption = paymentOptions.expand((e) => e["options"]).firstWhere(
+          (option) => option["name"] == _selectedPayment,
+          orElse: () => {},
+        );
+
+    if (selectedOption.containsKey("upi")) {
+      final Uri _upiUrl = Uri.parse(selectedOption["upi"]);
+      if (await canLaunchUrl(_upiUrl)) {
+        await launchUrl(_upiUrl);
+      } else {
+        _showErrorDialog("Payment app not installed.");
+      }
+    } else if (_selectedPayment == "************2575") {
+      _showSuccessDialog("Processing card payment...");
+    } else if (_selectedPayment == "Cash") {
+      _showSuccessDialog("Please pay with cash on delivery.");
+    }
+  }
+
+  // Show Success Dialog
+  void _showSuccessDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Payment Success"),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context); // Close Payment Screen
+              },
+              child: Text("OK"),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  // Show Error Dialog
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text("OK"),
+            )
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,12 +162,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: EdgeInsets.symmetric(vertical: height * 0.02, horizontal: width * 0.3),
               ),
-              onPressed: _selectedPayment != null
-                  ? () {
-                      // Payment processing logic here
-                      print("Proceeding with $_selectedPayment");
-                    }
-                  : null,
+              onPressed: _selectedPayment != null ? _processPayment : null,
               child: Text(
                 "Proceed",
                 style: TextStyle(fontSize: width * 0.045, color: Colors.white, fontWeight: FontWeight.bold),

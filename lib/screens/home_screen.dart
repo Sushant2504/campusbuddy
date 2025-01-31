@@ -3,6 +3,7 @@ import 'cafes_screen.dart';
 import 'canteen_screen.dart';
 import 'parking_screen.dart';
 import 'profile_screen.dart';
+import 'explore_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,11 +11,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 2; // Default selected index (Canteen)
+  int _selectedIndex = 0; // Default selected index (Home)
 
   // List of pages (replace with actual screens)
   final List<Widget> _pages = [
-    Center(child: Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+    ExploreScreen(),
     CafesScreen(),
     CanteenScreen(),
     ParkingScreen(),
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Explore'),
               BottomNavigationBarItem(icon: Icon(Icons.local_cafe), label: 'Cafes'),
               BottomNavigationBarItem(icon: Icon(Icons.fastfood), label: 'Canteen'),
               BottomNavigationBarItem(icon: Icon(Icons.local_parking), label: 'Parking'),

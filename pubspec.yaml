@@ -11,12 +11,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  url_launcher: ^6.1.14 # Add this dependency
+  url_launcher: ^6.3.1 # Add this dependency
   geolocator: ^13.0.2
   geocoding: ^2.1.0 #
+  # font_awesome_flutter: ^10.6.0  # ✅ Add this line
 
   cupertino_icons: ^1.0.8
   google_nav_bar: ^5.0.7
+  provider: ^6.1.2
+  font_awesome_flutter: ^10.8.0
 flutter_icons:
   android: true
   ios: true

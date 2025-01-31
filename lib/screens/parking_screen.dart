@@ -220,89 +220,136 @@ class ParkingScreen extends StatefulWidget {
 class _ParkingScreenState extends State<ParkingScreen> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      backgroundColor: Colors.blue.shade50,
+      backgroundColor: Colors.grey.shade100, // Soft background
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade50,
-        elevation: 0,
-        title: Text("Parking", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black)),
+        title: Text(
+          "Campus Parking",
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF3A77FA), Color(0xFF0052D4)], // Gradient Blue
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        elevation: 4,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
+
+      // 🔹 Body Section
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Hi, find the best parking spots", style: TextStyle(fontSize: 16, color: Colors.black54)),
-            SizedBox(height: 10),
+            // 🏁 Welcome Message
+            Text(
+              "Find the Best Parking Spots 🚗",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.black87),
+            ),
+            SizedBox(height: 12),
 
-            // Search Bar
+            // 🔎 Search Bar
             TextField(
               decoration: InputDecoration(
-                hintText: "Search parking slots...",
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
+                hintText: "Search for parking zones...",
+                prefixIcon: Icon(Icons.search, color: Colors.grey.shade600),
                 filled: true,
                 fillColor: Colors.white,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: EdgeInsets.symmetric(vertical: 14),
               ),
             ),
 
             SizedBox(height: 16),
 
-            // Parking Map Image (Dummy)
+            // 🗺️ Parking Map with Border & Shadow
             Expanded(
-              child: InteractiveViewer(
-                panEnabled: true,
-                boundaryMargin: EdgeInsets.all(20),
-                minScale: 1,
-                maxScale: 4,
-                child: Image.asset(
-                  "assets/parking_map.png", // Replace with your asset
-                  fit: BoxFit.cover,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 6, spreadRadius: 1)],
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: InteractiveViewer(
+                  panEnabled: true,
+                  boundaryMargin: EdgeInsets.all(20),
+                  minScale: 1,
+                  maxScale: 4,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      "assets/parking_map.png", // Replace with your actual image asset
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             ),
 
-            SizedBox(height: 20),
+            SizedBox(height: 24),
 
-            // Buttons to Direct to Parking Zone Screen
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildParkingZoneButton(context, "C"),
-                _buildParkingZoneButton(context, "B"),
-                _buildParkingZoneButton(context, "D"),
-                _buildParkingZoneButton(context, "E"),
-                // _buildParkingZoneButton(context, "A"),
-              ],
+            // 🚗 Parking Zone Buttons
+            Center(
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                children: [
+                  _buildParkingZoneButton(context, "A"),
+                  _buildParkingZoneButton(context, "B"),
+                  _buildParkingZoneButton(context, "C"),
+                  _buildParkingZoneButton(context, "D"),
+                  _buildParkingZoneButton(context, "E"),
+                ],
+              ),
             ),
+
+            SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
 
-  // Widget: Navigate to ParkingZoneScreen
+  // 🎨 Widget: Parking Zone Button with Hover Effect
   Widget _buildParkingZoneButton(BuildContext context, String label) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ParkingZoneScreen()),
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => ParkingZoneScreen(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+          ),
         );
       },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 200),
+        padding: EdgeInsets.symmetric(horizontal: 22, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.blue.shade800,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5)],
+          gradient: LinearGradient(
+            colors: [Color(0xFF3A77FA), Color(0xFF0052D4)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 6, spreadRadius: 1)],
         ),
         child: Text(
           "Zone $label",

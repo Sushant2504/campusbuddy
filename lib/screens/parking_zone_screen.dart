@@ -12,27 +12,27 @@ class _ParkingZoneScreenState extends State<ParkingZoneScreen> {
   Map<String, List<Map<String, dynamic>>> parkingZones = {
     "Zone A": [
       {"label": "A1", "status": "Available"},
-      {"label": "A2", "status": "Occupied"},
-      {"label": "A3", "status": "Available"},
-      {"label": "A4", "status": "Occupied"},
+      
+    ],
+    "Zone B": [
       {"label": "B1", "status": "Available"},
       {"label": "B2", "status": "Reserved"},
       {"label": "B3", "status": "Occupied"},
       {"label": "B4", "status": "Available"},
-    ],
-    "Zone B": [
       {"label": "B5", "status": "Available"},
-      {"label": "B6", "status": "Reserved"},
-      {"label": "B7", "status": "Occupied"},
-      {"label": "B8", "status": "Available"},
     ],
     "Zone C": [
       {"label": "C1", "status": "Available"},
       {"label": "C2", "status": "Occupied"},
       {"label": "C3", "status": "Reserved"},
-      {"label": "C4", "status": "Available"},
+      // {"label": "C4", "status": "Available"},
     ],
-    "Zone D": [],
+    "Zone D": [
+      {"label": "E1", "status": "Available"},
+      {"label": "E2", "status": "Occupied"},
+      {"label": "E3", "status": "Reserved"},
+      {"label": "E3", "status": "Reserved"},
+    ],
   };
 
   @override
